@@ -1,0 +1,17 @@
+﻿@model Salon.Models.Addrole
+@{
+    ViewBag.Title = "AddToRole";
+}
+
+<h2>AddToRole</h2>
+
+@using (Html.BeginForm("AddToRole", "Account"))
+{
+    @Html.LabelFor(m => m.Email)
+    @Html.TextBoxFor(m => m.Email)
+
+    @Html.DropDownListFor(m => m.Selectedroles, new SelectList(Model.roles))
+
+    <button type="submit" class="btn-default">Save</button>
+}
+

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Salon.Models.Car_dealership>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Car Dealership</h2>
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+<table id="pat" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.ActionLink("Cars", "Cars", new { id = item.Car_dealershipId })
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    {
+                        @Html.ActionLink("Add Car", "Add_Car", new { id = item.Car_dealershipId }, new { @class = "link" })
+                        @Html.ActionLink("Delete Car", "Delete_Car", new { id = item.Car_dealershipId }, new { @class = "link" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Car_dealershipId }, new { @class = "link" })
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Car_dealershipId }, new { @class = "link" })*@
+
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                        <button item_id="@item.Car_dealershipId" class="delete btn-link ">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var table = $("#pat").DataTable();
+            $(".delete").on("click", function () {
+                var btn = $(this)
+                bootbox.confirm("Are you sure", function (result) {
+                    if (result == true) {
+                        $.ajax({
+                            url: "/Car_dealership/Delete/" + btn.attr("item_id"),
+                            method: "GET",
+                            success: function () {
+                                table.row(btn.parents("tr")).remove().draw()
+                            }
+                        })
+                    }
+
+                })
+            })
+        })
+    </script>
+
+}
+
+
+
+
+@section Styles {
+    <style>
+       
+        .link{
+            margin: 5px;
+        }
+        button{
+            margin: 0px;
+        }
+        .btn-link{
+            margin-left: 5px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            padding: 0px;
+        }
+    </style>
+    }

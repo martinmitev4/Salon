@@ -1,0 +1,76 @@
+﻿@model Salon.Models.Car
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            <img style="max-width:300px; max-height:200px" src="@Model.Image" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => Model.Manufacturer.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelItem => @Model.Manufacturer.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.God)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.God)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Power)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Power)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fuel_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fuel_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gearbox)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gearbox)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Horse_Power)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Horse_Power)
+        </dd>
+
+    </dl>
+</div>
+@*   <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CarId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

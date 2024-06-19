@@ -1,0 +1,19 @@
+﻿@model Salon.Models.Add_Car
+@{
+    ViewBag.Title = "Add Car";
+}
+
+<h2>Add_Car</h2>
+
+
+
+@using (Html.BeginForm("Add_Car", "Car_dealership"))
+{
+    //@Html.LabelFor(m => m.Car_dealershipId)
+    @Html.DropDownListFor(m => m.CarId, new SelectList(Model.Cars, "CarId", "Model_Name"))
+    @Html.HiddenFor(m => m.Car_dealershipId)
+    <button type="submit" class="btn-default">Add</button>
+
+}
+
+@Html.ActionLink("Back to List", "Index")

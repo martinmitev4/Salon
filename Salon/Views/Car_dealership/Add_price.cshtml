@@ -1,0 +1,47 @@
+﻿@model Salon.Models.Price
+
+@{
+    ViewBag.Title = "Add_price";
+}
+
+<h2>Add_price</h2>
+
+
+
+@using (Html.BeginForm("Add_price", "Car_dealership"))
+{
+    //@Html.LabelFor(m => m.Car_dealershipId)
+    @Html.HiddenFor(m => m.Car_dealershipId)
+    @Html.HiddenFor(m => m.CarId)
+    @Html.TextBoxFor(m => m.price)
+    <button type="submit" class="btn-default">Add</button>
+}
+
+@*
+    <div>
+        <h4>Price</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Car_Dealership.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Car_Dealership.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.price)
+                <img src="@Model." />
+            </dd>
+
+        </dl>
+    </div>
+*@
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

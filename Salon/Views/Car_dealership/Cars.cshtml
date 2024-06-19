@@ -1,0 +1,88 @@
+﻿@model Salon.Models.Price
+
+@{
+    ViewBag.Title = "Cars";
+}
+
+<h2>Cars</h2>
+
+@{
+    var mydi = ViewData["d"] as Dictionary<int, string>;
+}
+
+<div class="con">
+
+    @foreach (var car in Model.Cars)
+    {
+    <div class="card">
+        <img src="@car.Image" style="width:300px; height:150px; margin-bottom:10px" />
+        <p>Model: @car.Model_Name</p>
+        <p>Power: @car.Power</p>
+        <p>Year: @car.God</p>
+
+        @foreach (var item in mydi)
+        {
+            if (@item.Key.Equals(@car.CarId))
+            {
+                <p>Price: @item.Value EUR</p>
+            }
+        }
+
+        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+        {
+            @Html.ActionLink("Add Price", "Add_price", new { id = car.CarId, car_d = Model.Car_dealershipId })
+        }
+        <br />
+        <a href="/Cars/Details/@car.CarId">Details</a>
+        <br />
+        <img car_id="@car.CarId" car_d="@Model.Car_dealershipId" class="AddFav" style="width50px; height:50px;" src="~/fav.png" />
+
+    </div>
+
+      }
+
+ </div>
+
+        @Html.ActionLink("Back to List", "Index")
+
+
+ @section Scripts{
+  <script>
+     $(document).ready(function () {
+        $(".AddFav").on("click", function () {
+            var btn = $(this)
+            $.ajax({
+                url: "/Car_dealership/Add_Favorite/" + btn.attr("car_id") + "/?car_d=" + btn.attr("car_d"),
+                method: "POST",
+                success: function () {
+                    bootbox.alert("Add to Favorites");
+                }
+            })                             
+        })
+    })
+  </script>
+}
+
+
+@section Styles {
+    <style>
+        .AddFav {
+            cursor: pointer;
+        }
+        .con {
+            vertical-align: top
+        }
+        .card {
+            display: inline-block;
+            border: 1px solid gray;
+            margin: 10px;
+            padding: 5px;
+            vertical-align: top;
+            width: 310px;
+            text-align: center;
+        }
+        .card image {
+            vertical-align: top;
+        }
+    </style>
+}

@@ -1,0 +1,29 @@
+﻿@model Salon.Models.Add_Car
+@{
+    ViewBag.Title = "Delete Car";
+}
+
+<h2>Delete Car</h2>
+
+@using (Html.BeginForm("Delete_Car", "Car_dealership"))
+{
+    @Html.DropDownListFor(m => m.CarId, new SelectList(Model.Cars, "CarId", "Model_Name"))
+    @Html.HiddenFor(m => m.Car_dealershipId)
+    <button type="submit" class="btn-default">Delete</button>
+
+}
+
+@Html.ActionLink("Back to List", "Index")
+
+@section Styles {
+    <style>
+        button {
+            display: inline-block;
+        }
+
+        .card {
+            display: inline-block;
+        }
+    </style>
+
+}
